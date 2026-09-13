@@ -1,0 +1,61 @@
+campaign_id,campaign_name,product_id,channel_id,objective,start_date,end_date,budget
+1,Retention - Engage Scalable Markets,8,6,Retention ,22/03/2025,06/05/2025,28604.69
+2,Retention - Re-Intermediate Vertical E-Commerce,10,1,Retention ,26/10/2024,25/11/2024,91305.86
+3,Brand Awareness - Seize Extensible Info-Mediaries,4,4,Brand Awareness ,02/12/2025,16/12/2025,26818.48
+4,Retention - Harness Cutting-Edge Portals,3,1,Retention ,01/12/2024,30/01/2025,145371.08
+5,Brand Awareness - Grow Global Applications,2,1,Brand Awareness ,19/10/2024,18/11/2024,69773.61
+6,Retention - Deploy E-Business Paradigms,2,5,Retention ,11/01/2025,12/03/2025,77720.1
+7,Upsell - Re-Intermediate Proactive Networks,7,5,Upsell ,16/05/2026,06/06/2026,40765.5
+8,Acquisition - Leverage Back-End Vortals,10,2,Acquisition ,17/07/2025,16/08/2025,73289.24
+9,Upsell - Mesh One-To-One Portals,3,2,Upsell ,25/08/2024,15/09/2024,100977.48
+10,Brand Awareness - Repurpose Seamless Systems,3,1,Brand Awareness ,26/11/2025,25/01/2026,113920.68
+11,Retention - E-Enable 24/365 E-Markets,6,3,Retention ,14/08/2024,28/09/2024,114310.87
+12,Acquisition - Envisioneer One-To-One Models,5,1,Acquisition ,21/07/2024,04/08/2024,88794.21
+13,Brand Awareness - Brand Value-Added Communities,9,4,Brand Awareness ,27/08/2024,17/09/2024,136132.17
+14,Acquisition - Leverage Open-Source Vortals,6,2,Acquisition ,15/11/2024,15/12/2024,123524.14
+15,Reactivation - Aggregate Strategic Solutions,7,6,Reactivation ,14/04/2026,29/05/2026,114771.98
+16,Acquisition - Evolve Customized E-Markets,2,6,Acquisition ,11/01/2025,12/03/2025,13062.8
+17,Acquisition - Reinvent Proactive Networks,1,2,Acquisition ,24/11/2024,08/01/2025,5997.3
+18,Upsell - Re-Contextualize Innovative Models,6,4,Upsell ,16/03/2025,15/05/2025,35804.86
+19,Acquisition - Innovate Robust Platforms,1,4,Acquisition ,02/04/2025,01/06/2025,101210.92
+20,Acquisition - Grow Robust Convergence,6,6,Acquisition ,15/04/2025,30/05/2025,64623.64
+21,Upsell - Empower Frictionless Schemas,4,3,Upsell ,08/01/2026,22/01/2026,63348.91
+22,Acquisition - Aggregate Best-Of-Breed E-Tailers,7,5,Acquisition ,04/10/2024,03/11/2024,133265.1
+23,Reactivation - Re-Intermediate Wireless E-Business,10,1,Reactivation ,28/12/2025,18/01/2026,134856.61
+24,Reactivation - Transform Proactive Users,9,6,Reactivation ,02/10/2025,16/11/2025,136830.41
+25,Upsell - Benchmark Cutting-Edge Experiences,9,3,Upsell ,08/11/2024,07/01/2025,50512.32
+26,Acquisition - Seize User-Centric Platforms,4,3,Acquisition ,23/10/2025,06/11/2025,105203.09
+27,Brand Awareness - Streamline Enterprise Technologies,8,2,Brand Awareness ,20/10/2024,03/11/2024,44386.81
+28,Upsell - Drive Transparent Info-Mediaries,8,6,Upsell ,13/04/2025,13/05/2025,32638.43
+29,Upsell - Target Synergistic Architectures,7,1,Upsell ,06/04/2025,05/06/2025,31771.71
+30,Retention - Productize Scalable Schemas,10,6,Retention ,12/11/2024,03/12/2024,54605.61
+31,Acquisition - Seize Leading-Edge Methodologies,6,4,Acquisition ,16/01/2025,30/01/2025,67343.85
+32,Acquisition - Cultivate Extensible Action-Items,9,3,Acquisition ,09/09/2024,08/11/2024,125487.63
+33,Acquisition - E-Enable B2C Convergence,5,3,Acquisition ,24/01/2026,25/03/2026,22384.21
+34,Acquisition - Implement Frictionless Mindshare,8,3,Acquisition ,10/06/2025,01/07/2025,111564.25
+35,Reactivation - Implement B2B Deliverables,10,6,Reactivation ,15/05/2025,05/06/2025,82060.96
+36,Reactivation - Facilitate Sticky Portals,10,5,Reactivation ,15/03/2025,14/05/2025,46752.07
+37,Brand Awareness - Innovate B2C Vortals,10,5,Brand Awareness ,31/12/2024,30/01/2025,76458.84
+38,Brand Awareness - Orchestrate Value-Added Action-Items,5,2,Brand Awareness ,08/11/2025,22/11/2025,48491.6
+39,Brand Awareness - Re-Contextualize Transparent Supply-Chains,7,6,Brand Awareness ,24/11/2024,24/12/2024,91431.88
+40,Upsell - Embrace 24/7 Networks,6,5,Upsell ,20/02/2026,13/03/2026,67907.37
+41,Acquisition - Mesh Robust Convergence,9,3,Acquisition ,22/01/2026,21/02/2026,28838.8
+42,Upsell - Iterate Best-Of-Breed Metrics,3,2,Upsell ,24/11/2024,23/01/2025,21904.55
+43,Upsell - Matrix Revolutionary Supply-Chains,5,2,Upsell ,08/01/2026,29/01/2026,84270.87
+44,Brand Awareness - Brand Holistic E-Services,9,1,Brand Awareness ,30/11/2024,14/01/2025,135849.89
+45,Acquisition - Drive Magnetic Markets,9,4,Acquisition ,01/04/2026,31/05/2026,54873.86
+46,Acquisition - Productize Distributed Web-Readiness,8,4,Acquisition ,23/12/2024,06/02/2025,111285.02
+47,Upsell - Brand Collaborative Bandwidth,4,3,Upsell ,28/09/2024,12/11/2024,100505.9
+48,Brand Awareness - Benchmark B2B Partnerships,10,2,Brand Awareness ,23/01/2026,13/02/2026,140075.46
+49,Retention - Visualize 24/7 Web-Readiness,4,5,Retention ,28/08/2025,27/10/2025,124042.25
+50,Acquisition - Iterate Holistic Platforms,5,1,Acquisition ,04/03/2025,03/05/2025,87157.76
+51,Acquisition - Integrate Synergistic Models,3,6,Acquisition ,26/08/2025,10/10/2025,100269.42
+52,Reactivation - Redefine Extensible Convergence,6,1,Reactivation ,07/02/2025,08/04/2025,135266.04
+53,Reactivation - Empower Proactive E-Commerce,10,3,Reactivation ,04/05/2026,25/05/2026,62930.22
+54,Reactivation - Embrace Extensible Action-Items,5,1,Reactivation ,04/09/2025,25/09/2025,52385.23
+55,Brand Awareness - Exploit User-Centric Info-Mediaries,7,3,Brand Awareness ,09/07/2025,23/08/2025,6567.61
+56,Upsell - Visualize Extensible Action-Items,1,5,Upsell ,09/12/2024,23/12/2024,124849.91
+57,Acquisition - Scale Turn-Key Relationships,3,2,Acquisition ,06/10/2024,20/11/2024,121142.2
+58,Brand Awareness - Brand Turn-Key Metrics,6,1,Brand Awareness ,02/05/2025,01/06/2025,20145.91
+59,Retention - Re-Intermediate Granular Networks,7,5,Retention ,19/04/2026,10/05/2026,88644.32
+60,Brand Awareness - Extend Transparent E-Services,5,5,Brand Awareness ,07/04/2025,28/04/2025,72277.35

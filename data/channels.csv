@@ -1,0 +1,7 @@
+channel_id,channel_name,channel_type
+1,Facebook Ads,Paid Social
+2,Instagram Ads,Paid Social
+3,Google Search,Paid Search
+4,Google Display,Display
+5,Email,Owned
+6,Affiliate,Partnership
