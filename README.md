@@ -102,8 +102,4 @@ Each model is tested on an identical set of questions to ensure a fair compariso
 - **RAGAS** evaluates the RAG system's behavior specifically — whether answers are faithful to the retrieved data, whether the right context was retrieved, and factual correctness against a reference answer.
 - **NLG metrics** (BLEU, METEOR, ROUGE, Perplexity, BERTScore, BARTScore) evaluate answer quality independently, across lexical overlap, semantic similarity, and fluency — providing a broader picture than any single metric alone.
 
-## Notes & Limitations
 
-- SQL generation is grounded in schema metadata but is not guaranteed to be 100% accurate; queries are executed with basic error handling, and failures are logged rather than silently swallowed.
-- The current schema-grounding relies on the source database's foreign key constraints; tables without properly defined constraints will not have their relationships reflected in the LLM's schema context.
-- Model benchmarking was done on a small, fixed test set — results are indicative of relative model behavior on this domain and dataset, not a general-purpose leaderboard.
