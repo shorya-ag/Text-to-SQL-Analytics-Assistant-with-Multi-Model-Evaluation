@@ -3,8 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Pickled model evaluation results
-*.pkl
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+temp/
+tmp/
 
 # Environment / secrets
 .env
