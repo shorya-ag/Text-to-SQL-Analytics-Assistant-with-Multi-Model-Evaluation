@@ -1,19 +1,8 @@
-# =========================================================
-# data_cleaning.py
-# Owns the DB connection. Loads raw tables from MySQL, cleans them,
-# then recreates the cleaned tables (with their PK/FK constraints)
-# inside a fresh in-memory SQLite engine.
-#
-# Exposes: `engine` — the cleaned, constrained in-memory engine.
-# rag_common.py imports this `engine` directly; nothing else changes.
-# =========================================================
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine, inspect, text
 
-# ---------------------------------------------------------
 # 1. Connect to MySQL and load raw tables into pandas
-# ---------------------------------------------------------
 mysql_engine = create_engine("mysql+pymysql://root:#Shorya1375@localhost/rag_evaluation")
 mysql_inspector = inspect(mysql_engine)
 
@@ -21,10 +10,7 @@ table_names = mysql_inspector.get_table_names()
 tables = {name: pd.read_sql(f"SELECT * FROM {name}", mysql_engine) for name in table_names}
 print("Loaded raw tables:", list(tables.keys()))
 
-
-# ---------------------------------------------------------
 # 2. Clean the data (missing values + outlier detection)
-# ---------------------------------------------------------
 for table_name, df in tables.items():
     numeric_columns = df.select_dtypes(include=np.number).columns
     categorical_columns = df.select_dtypes(include="object").columns
@@ -42,7 +28,7 @@ for table_name, df in tables.items():
     total_missing = df.isnull().sum().sum()
     print(f"{table_name}: {total_missing} missing values")
 
-# Outlier detection (IQR) — reporting only, not removing
+# Outlier detection (IQR) 
 for table_name, df in tables.items():
     numeric_columns = df.select_dtypes(include=np.number).columns
     for column in numeric_columns:
@@ -56,13 +42,7 @@ for table_name, df in tables.items():
 
 print("\nData cleaning complete.")
 
-
-# ---------------------------------------------------------
-# 3. Recreate the cleaned tables in a fresh in-memory engine,
-#    carrying over the PK/FK constraints that already exist on
-#    the MySQL tables (so downstream schema inspection still
-#    sees real relationships, not just plain columns).
-# ---------------------------------------------------------
+# 3. Recreating the cleaned tables 
 def sqlite_type_for(sa_type):
     type_str = str(sa_type).upper()
     if "INT" in type_str:
@@ -81,7 +61,8 @@ def build_create_table_ddl(table_name, mysql_inspector):
     column_defs = [f'"{col["name"]}" {sqlite_type_for(col["type"])}' for col in columns]
 
     if pk_cols:
-        column_defs.append(f'PRIMARY KEY ({", ".join(f\'"{c}"\' for c in pk_cols)})')
+        quoted_pk_cols = ", ".join(f'"{c}"' for c in pk_cols)
+        column_defs.append(f'PRIMARY KEY ({quoted_pk_cols})')
 
     for fk in fks:
         child_col = fk["constrained_columns"][0]
@@ -107,6 +88,3 @@ for table_name, df in tables.items():
 
 print("\nCleaned, constrained tables loaded into in-memory engine:", list(tables.keys()))
 
-# NOTE: SQLite does not validate FOREIGN KEY / PRIMARY KEY at CREATE TABLE
-# time regardless of table creation order, so the loop above is safe even
-# though tables are created in whatever order MySQL happens to list them.

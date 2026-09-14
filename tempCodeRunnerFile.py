@@ -1,0 +1,1 @@
+mysql_engine = create_engine("mysql+pymysql://root:#Shorya1375@localhost/rag_evaluation")

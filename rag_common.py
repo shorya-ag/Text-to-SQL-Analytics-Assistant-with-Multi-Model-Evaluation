@@ -1,9 +1,3 @@
-# =========================================================
-# rag_common.py
-# Shared pipeline + evaluation functions, used by every model run.
-# `engine` is imported from data_cleaning.py (cleaned + constrained
-# in-memory DB) — this file does not connect to MySQL itself.
-# =========================================================
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -27,13 +21,8 @@ from ragas.metrics import LLMContextRecall, Faithfulness, FactualCorrectness
 
 import pickle
 
-# ---------------------------------------------------------
-# SECTION 1: Setup — engine (from data_cleaning.py) + schema
-# ---------------------------------------------------------
+# SECTION 1: Setup - engine (from data_cleaning.py) + schema
 from data_cleaning import engine
-
-# llm = your existing LLM object (OllamaLLM, etc.) — passed into
-# the functions below by run_model.py, one model at a time.
 
 
 def build_schema_description(engine):
@@ -59,10 +48,7 @@ def build_schema_description(engine):
 
 schema = build_schema_description(engine)
 
-
-# ---------------------------------------------------------
-# SECTION 2: Standalone question condensation (chat history aware)
-# ---------------------------------------------------------
+# SECTION 2: Standalone question condensation
 CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template("""Given the following conversation and a follow-up question, rephrase the follow-up question to be a standalone question that makes sense without the chat history.
 If the follow-up question is already standalone, return it unchanged.
 
@@ -96,10 +82,7 @@ def condense_question(llm, question, chat_history):
     )
     return _extract_text(llm.invoke(prompt)).strip()
 
-
-# ---------------------------------------------------------
 # SECTION 3: SQL generation (schema-grounded)
-# ---------------------------------------------------------
 sql_prompt = """You are a SQL expert. Use ONLY the tables, columns, and foreign key relationships listed below.
 Never assume a column exists in a table unless it is explicitly listed under that table.
 If the requested information spans multiple tables, JOIN them using the foreign key relationships provided.
@@ -118,10 +101,7 @@ def generate_sql(llm, question):
     sql_query = _extract_text(llm.invoke(prompt))
     return sql_query.strip().replace("```sql", "").replace("```", "").strip()
 
-
-# ---------------------------------------------------------
 # SECTION 4: Retrieved context (from SQL result)
-# ---------------------------------------------------------
 def build_retrieved_context(result_df, source_name="MySQL Database"):
     """
     Converts the SQL query result into one context string.
@@ -133,10 +113,7 @@ def build_retrieved_context(result_df, source_name="MySQL Database"):
     retrieved_context = f"Source: {source_name}\n\nRelevant Data:\n{table_data}"
     return retrieved_context
 
-
-# ---------------------------------------------------------
 # SECTION 5: Answer generation (from retrieved context)
-# ---------------------------------------------------------
 answer_prompt = """You are a helpful data analyst. Answer the user's question using ONLY the data provided below.
 If the data does not contain enough information to answer, say so clearly.
 
@@ -152,10 +129,7 @@ def generate_answer(llm, question, context):
     prompt = answer_prompt.format(question=question, context=context)
     return _extract_text(llm.invoke(prompt)).strip()
 
-
-# ---------------------------------------------------------
 # SECTION 6: End-to-end query processor
-# ---------------------------------------------------------
 def process_query(llm, question, chat_history):
     """
     Runs the full pipeline: condense -> generate SQL -> execute -> build context -> generate answer.
@@ -194,10 +168,7 @@ def run_pipeline_on_queries(llm, sample_queries):
         chat_history.append((question, answer))
     return results
 
-
-# ---------------------------------------------------------
 # SECTION 7: Interactive chat loop (maintains chat history)
-# ---------------------------------------------------------
 def make_ask_function(llm):
     """Returns an `ask(question)` closure bound to a specific model + its own chat history."""
     chat_history = []
@@ -213,22 +184,11 @@ def make_ask_function(llm):
 
     return ask
 
-# Example:
-# ask = make_ask_function(llm)
-# ask("Which campaign has the highest number of clicks?")
-# ask("What about conversions?")   # <- condensed to standalone using chat history
-
-
-# ---------------------------------------------------------
-# SECTION 9 (results builder, matches RAGAS's expected schema)
-# ---------------------------------------------------------
+# SECTION 8: (results builder, matches RAGAS's expected schema)
 def build_results(llm, sample_queries):
     return run_pipeline_on_queries(llm, sample_queries)
 
-
-# =========================================================
-# SECTION 12: Intrinsic PPL-Score
-# =========================================================
+#Intrinsic PPL-Score
 _ppl_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
 _ppl_model = GPT2LMHeadModel.from_pretrained("gpt2")
 _ppl_model.eval()
@@ -248,10 +208,7 @@ def calculate_perplexity(text, model=_ppl_model, tokenizer=_ppl_tokenizer):
 def compute_perplexity_scores(results):
     return [calculate_perplexity(item["response"]) for item in results]
 
-
-# =========================================================
-# SECTION 13: model based metrics - BERT and BART
-# =========================================================
+# model based metrics - BERT and BART
 _bart_model = BartForConditionalGeneration.from_pretrained(
     "facebook/bart-large-cnn", disable_mmap=True
 )
@@ -271,13 +228,7 @@ def compute_bert_bart_scores(results):
         bert_scores.append(F1.numpy().mean())
     return bert_scores, bart_scores
 
-
-# ---------------------------------------------------------
-# n-gram metrics (BLEU / ROUGE / METEOR) — same as sections 10-11 originally
-# ---------------------------------------------------------
 _rouge = Rouge()
-
-
 def compute_ngram_metrics(results):
     bleu, rouge_one, meteor_scores = [], [], []
     for item in results:
@@ -322,10 +273,7 @@ def evaluate_model(llm, model_name, sample_queries):
         "ragas": ragas_result,
     }
 
-
-# =========================================================
-# SECTION 14: Save the model
-# =========================================================
+# Save the model
 def save_scores(data, filename):
     with open(filename, "wb") as f:
         pickle.dump(data, f)

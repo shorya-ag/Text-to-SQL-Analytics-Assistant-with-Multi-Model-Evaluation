@@ -4,19 +4,19 @@ A Retrieval-Augmented Generation (RAG) system that answers natural language ques
 
 ## Overview
 
-This project implements an end-to-end pipeline that lets a user ask questions in plain English about data stored in a relational database (MySQL) and get accurate, data-grounded answers back — without writing any SQL themselves. Rather than relying on a vector-based document retriever, retrieval here means: **generate SQL → execute it → use the real query result as the retrieved context** for the LLM's final answer.
+This project implements an end-to-end pipeline that lets a user ask questions in plain English about data stored in a relational database (MySQL) and get accurate, data-grounded answers back - without writing any SQL themselves. Rather than relying on a vector-based document retriever, retrieval here means: **generate SQL → execute it → use the real query result as the retrieved context** for the LLM's final answer.
 
 The project also includes a full evaluation framework to benchmark multiple open-source LLMs against each other on this task.
 
 ## Key Features
 
-- **Text-to-SQL generation** — an LLM translates natural language questions into SQL, grounded in a dynamically-generated schema description (tables, columns, primary keys, foreign key relationships) so it never hallucinates non-existent columns or joins.
-- **SQL-based retrieval** — instead of vector similarity search, retrieval is the actual SQL query result, converted into a structured text context for the LLM.
-- **Multi-turn conversation support** — follow-up questions ("What about conversions?") are automatically condensed into standalone questions using chat history before SQL generation.
-- **Data cleaning pipeline** — missing value imputation (median/categorical), IQR-based outlier detection, and PK/FK integrity validation, run on the raw MySQL tables before they're used for querying.
-- **Constraint-preserving in-memory layer** — cleaned data is loaded into a fresh in-memory database that recreates the original schema's primary and foreign key constraints, so schema introspection stays accurate without modifying the live source database.
-- **Multi-model benchmarking** — the entire pipeline runs identically across multiple open-source LLMs (TinyLlama, Llama 3.2, Gemma2:2b) for direct, apples-to-apples comparison.
-- **Comprehensive evaluation suite** — 9 metrics across two frameworks:
+- **Text-to-SQL generation** - an LLM translates natural language questions into SQL, grounded in a dynamically-generated schema description (tables, columns, primary keys, foreign key relationships) so it never hallucinates non-existent columns or joins.
+- **SQL-based retrieval** - instead of vector similarity search, retrieval is the actual SQL query result, converted into a structured text context for the LLM.
+- **Multi-turn conversation support** - follow-up questions ("What about conversions?") are automatically condensed into standalone questions using chat history before SQL generation.
+- **Data cleaning pipeline** - missing value imputation (median/categorical), IQR-based outlier detection, and PK/FK integrity validation, run on the raw MySQL tables before they're used for querying.
+- **Constraint-preserving in-memory layer** - cleaned data is loaded into a fresh in-memory database that recreates the original schema's primary and foreign key constraints, so schema introspection stays accurate without modifying the live source database.
+- **Multi-model benchmarking** - the entire pipeline runs identically across multiple open-source LLMs (TinyLlama, Llama 3.2, Gemma2:2b) for direct, apples-to-apples comparison.
+- **Comprehensive evaluation suite** - 9 metrics across two frameworks:
   - **RAGAS:** Faithfulness, Context Recall, Factual Correctness
   - **NLG metrics:** BLEU, METEOR, ROUGE, Intrinsic Perplexity, BERTScore, BARTScore
 
@@ -92,14 +92,15 @@ python consolidate_results.py
 ```
 
 Outputs:
-- `<model>_scores.pkl` — per-model results and metric scores
-- `model_comparison_results.csv` — merged per-question, per-model comparison
+- `<model>_scores.pkl` - per-model results and metric scores
+- `model_comparison_results.csv` - merged per-question, per-model comparison
+- `model_comparison_metrics\perplexity.png` - model output in chart form
 
 ## Evaluation Approach
 
 Each model is tested on an identical set of questions to ensure a fair comparison. Two complementary evaluation angles are used:
 
-- **RAGAS** evaluates the RAG system's behavior specifically — whether answers are faithful to the retrieved data, whether the right context was retrieved, and factual correctness against a reference answer.
-- **NLG metrics** (BLEU, METEOR, ROUGE, Perplexity, BERTScore, BARTScore) evaluate answer quality independently, across lexical overlap, semantic similarity, and fluency — providing a broader picture than any single metric alone.
+- **RAGAS** evaluates the RAG system's behavior specifically - whether answers are faithful to the retrieved data, whether the right context was retrieved, and factual correctness against a reference answer.
+- **NLG metrics** (BLEU, METEOR, ROUGE, Perplexity, BERTScore, BARTScore) evaluate answer quality independently, across lexical overlap, semantic similarity, and fluency - providing a broader picture than any single metric alone.
 
 

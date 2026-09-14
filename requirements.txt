@@ -1,0 +1,26 @@
+# --- Database ---
+SQLAlchemy>=2.0.0
+PyMySQL>=1.1.0
+
+# --- Data handling ---
+pandas>=2.0.0
+numpy>=1.24.0
+
+# --- LLM orchestration ---
+langchain-core>=0.3.0
+langchain-ollama>=0.2.0
+
+# --- RAG evaluation ---
+ragas>=0.2.0
+
+# --- NLG evaluation metrics ---
+nltk>=3.8.0
+rouge>=1.0.1
+bert-score>=0.3.13
+
+# --- Model-based metrics / deep learning ---
+transformers>=4.40.0
+torch>=2.2.0
+
+# --- Visualization ---
+matplotlib>=3.8.0
