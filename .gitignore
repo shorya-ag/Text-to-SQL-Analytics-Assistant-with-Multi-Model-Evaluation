@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Pickled model evaluation results
-*.pkl 
+*.pkl/ 
 
 # Temporary files
 *.tmp
@@ -14,7 +14,7 @@ __pycache__/
 *.swp
 temp/
 tmp/
-tempCodeRunnerFile.py/
+
 
 # Environment / secrets
 .env
